@@ -1,15 +1,19 @@
 <?php
 
 namespace App\Controllers;
-
+use CodeIgniter\Database\BaseConnection;
 
 
 class utama extends baseController
 {
 
     protected $sesi_user;
+    protected BaseConnection $db;
+
     public function __construct()
     {
+        $this->db = \Config\Database::connect();
+    
         $sesi_user = new \App\Models\global_m();
         $sesi_user->ceksesi();
     }
