@@ -10,15 +10,15 @@
         text-shadow: black 1px 1px 1px;
     }
 
-.color-yellow {
-    color: yellow;
-    text-shadow: black 1px 1px 1px;
-}
+    .color-yellow {
+        color: yellow;
+        text-shadow: black 1px 1px 1px;
+    }
 
-.color-pink {
-    color: pink;
-    text-shadow: black 1px 1px 1px;
-}
+    .color-pink {
+        color: pink;
+        text-shadow: black 1px 1px 1px;
+    }
 
     th {
         text-align: center;
@@ -27,7 +27,10 @@
     .w50 {
         width: 100px;
     }
-    td{padding: 1px;}
+
+    td {
+        padding: 1px;
+    }
 </style>
 <div class='container-fluid'>
     <div class='row'>
@@ -71,7 +74,7 @@
                             ) { ?>
                                 <form method="post" class="col-md-2">
                                     <h1 class="page-header col-md-12">
-                                        <button name="new" class="btn btn-info btn-block btn-lg" value="OK" style="">New</button>
+                                        <button name="new" class="btn btn-warning btn-block btn-lg fa fa-cogs" value="OK" style="font-size:12px;"> Generate</button>
                                         <input type="hidden" name="transaction_id" />
                                     </h1>
                                 </form>
@@ -100,7 +103,7 @@
                                             ->get();
                                         //echo $this->db->getLastQuery();
                                         ?>
-                                        <select required class="form-control select" id="category_id" name="category_id">
+                                        <select class="form-control select" id="category_id" name="category_id">
                                             <option value="" <?= ($category_id == "") ? "selected" : ""; ?>>Pilih Category</option>
                                             <?php
                                             foreach ($category->getResult() as $category) { ?>
@@ -112,7 +115,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="transaction_date">Tgl Dokumen:</label>
                                     <div class="col-sm-10">
-                                        <input required type="date" autofocus class="form-control" id="transaction_date" name="transaction_date" placeholder="" value="<?= $transaction_date; ?>">
+                                        <input type="date" autofocus class="form-control" id="transaction_date" name="transaction_date" placeholder="" value="<?= $transaction_date; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -132,7 +135,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="transaction_nopendate">Tgl Nopen:</label>
                                     <div class="col-sm-10">
-                                        <input required type="date" autofocus class="form-control" id="transaction_nopendate" name="transaction_nopendate" placeholder="" value="<?= $transaction_nopendate; ?>">
+                                        <input type="date" autofocus class="form-control" id="transaction_nopendate" name="transaction_nopendate" placeholder="" value="<?= $transaction_nopendate; ?>">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -164,7 +167,7 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="transaction_status">Status</label>
                                     <div class="col-sm-10">
-                                        <select required class="form-control select" id="transaction_status" name="transaction_status">
+                                        <select class="form-control select" id="transaction_status" name="transaction_status">
                                             <option value="Pending" <?= ($transaction_status == "Pending") ? "selected" : ""; ?>>Pending</option>
                                             <option value="Done" <?= ($transaction_status == "Done") ? "selected" : ""; ?>>Done</option>
                                         </select>
@@ -181,6 +184,11 @@
                                 </div>
                             </form>
                         </div>
+                        <script>
+                            <?php if (isset($_POST['new'])) { ?>
+                                $("#submit").click();
+                            <?php } ?>
+                        </script>
                     <?php } else { ?>
                         <?php
                         if (isset($_GET["from"]) && $_GET["from"] != "") {
@@ -225,7 +233,7 @@
                                         <?php //}
                                         ?>
                                         <!-- <th>No.</th> -->
-                                        <!-- <th>User</th> -->
+                                        <th>User</th>
                                         <th>Category</th>
                                         <th class="w50">Tgl SP</th>
                                         <th>Surat Permohonan</th>
@@ -317,7 +325,7 @@
                                                 <?php } ?>
                                             </td>
                                             <!-- <td><?= $no++; ?></td> -->
-                                            <!-- <td><?= $usr->user_name; ?></td> -->
+                                            <td><?= $usr->user_name; ?></td>
                                             <td><?= $usr->category_name; ?></td>
                                             <td><?= $usr->transaction_date; ?></td>
                                             <td><a target="_blank" href="<?= base_url("images/transaction_suratatc/" . $usr->transaction_suratatc); ?>" class="color-pink fa fa-download"></a>&nbsp;&nbsp;<?= $usr->transaction_surat; ?></td>
