@@ -17,7 +17,7 @@
                             <h4 class="card-title"></h4>
                             <!-- <h6 class="card-subtitle">Export data to Copy, CSV, Excel, PDF & Print</h6> -->
                         </div>
-                       
+
                         <?php if (!isset($_POST['new']) && !isset($_POST['edit']) && !isset($_GET['report'])) { ?>
                             <?php if (isset($_GET["user_id"])) { ?>
                                 <form action="<?= site_url("user"); ?>" method="get" class="col-md-2">
@@ -26,26 +26,26 @@
                                     </h1>
                                 </form>
                             <?php } ?>
-                            <?php 
+                            <?php
                             if (
                                 (
-                                    isset(session()->get("position_administrator")[0][0]) 
+                                    isset(session()->get("position_administrator")[0][0])
                                     && (
-                                        session()->get("position_administrator") == "1" 
+                                        session()->get("position_administrator") == "1"
                                         || session()->get("position_administrator") == "2"
                                     )
                                 ) ||
                                 (
-                                    isset(session()->get("halaman")['10']['act_create']) 
+                                    isset(session()->get("halaman")['10']['act_create'])
                                     && session()->get("halaman")['10']['act_create'] == "1"
                                 )
                             ) { ?>
-                            <form method="post" class="col-md-2">
-                                <h1 class="page-header col-md-12">
-                                    <button name="new" class="btn btn-info btn-block btn-lg" value="OK" style="">New</button>
-                                    <input type="hidden" name="category_id" />
-                                </h1>
-                            </form>
+                                <form method="post" class="col-md-2">
+                                    <h1 class="page-header col-md-12">
+                                        <button name="new" class="btn btn-info btn-block btn-lg" value="OK" style="">New</button>
+                                        <input type="hidden" name="category_id" />
+                                    </h1>
+                                </form>
                             <?php } ?>
                         <?php } ?>
                     </div>
@@ -62,13 +62,22 @@
                             <div class="lead">
                                 <h3><?= $judul; ?></h3>
                             </div>
-                            <form class="form-horizontal" method="post" enctype="multipart/form-data">                                                     
+                            <form class="form-horizontal" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="category_name">Nama Kategori:</label>
                                     <div class="col-sm-10">
                                         <input required type="text" autofocus class="form-control" id="category_name" name="category_name" placeholder="" value="<?= $category_name; ?>">
                                     </div>
-                                </div>  
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="category_alert">Notifikasi:</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" id="category_alert" name="category_alert">
+                                            <option value="0" <?= ($category_alert == "0") ? "selected" : ""; ?>>Tidak</option>
+                                            <option value="1" <?= ($category_alert == "1") ? "selected" : ""; ?>>Ya</option>
+                                        </select>
+                                    </div>
+                                </div>
 
                                 <input type="hidden" name="category_id" value="<?= $category_id; ?>" />
                                 <div class="form-group">
@@ -97,6 +106,7 @@
                                         <?php } ?>
                                         <th>No.</th>
                                         <th>Kategori</th>
+                                        <th>Notifikasi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -107,53 +117,56 @@
                                         ->get();
                                     //echo $this->db->getLastquery();
                                     $no = 1;
-                                    foreach ($usr->getResult() as $usr) { ?>
+                                    foreach ($usr->getResult() as $usr) { 
+                                        $notif=array("Tidak","Ya");
+                                        ?>
                                         <tr>
                                             <?php if (!isset($_GET["report"])) { ?>
                                                 <td style="padding-left:0px; padding-right:0px;">
-                                                    <?php 
+                                                    <?php
                                                     if (
                                                         (
-                                                            isset(session()->get("position_administrator")[0][0]) 
+                                                            isset(session()->get("position_administrator")[0][0])
                                                             && (
-                                                                session()->get("position_administrator") == "1" 
+                                                                session()->get("position_administrator") == "1"
                                                                 || session()->get("position_administrator") == "2"
                                                             )
                                                         ) ||
                                                         (
-                                                            isset(session()->get("halaman")['10']['act_update']) 
+                                                            isset(session()->get("halaman")['10']['act_update'])
                                                             && session()->get("halaman")['10']['act_update'] == "1"
                                                         )
                                                     ) { ?>
-                                                    <form method="post" class="btn-action" style="">
-                                                        <button class="btn btn-sm btn-warning " name="edit" value="OK"><span class="fa fa-edit" style="color:white;"></span> </button>
-                                                        <input type="hidden" name="category_id" value="<?= $usr->category_id; ?>" />
-                                                    </form>
-                                                    <?php }?>
-                                                    
-                                                    <?php 
+                                                        <form method="post" class="btn-action" style="">
+                                                            <button class="btn btn-sm btn-warning " name="edit" value="OK"><span class="fa fa-edit" style="color:white;"></span> </button>
+                                                            <input type="hidden" name="category_id" value="<?= $usr->category_id; ?>" />
+                                                        </form>
+                                                    <?php } ?>
+
+                                                    <?php
                                                     if (
                                                         (
-                                                            isset(session()->get("position_administrator")[0][0]) 
+                                                            isset(session()->get("position_administrator")[0][0])
                                                             && (
-                                                                session()->get("position_administrator") == "1" 
+                                                                session()->get("position_administrator") == "1"
                                                                 || session()->get("position_administrator") == "2"
                                                             )
                                                         ) ||
                                                         (
-                                                            isset(session()->get("halaman")['10']['act_delete']) 
+                                                            isset(session()->get("halaman")['10']['act_delete'])
                                                             && session()->get("halaman")['10']['act_delete'] == "1"
                                                         )
                                                     ) { ?>
-                                                    <form method="post" class="btn-action" style="">
-                                                        <button class="btn btn-sm btn-danger delete" onclick="return confirm(' you want to delete?');" name="delete" value="OK"><span class="fa fa-close" style="color:white;"></span> </button>
-                                                        <input type="hidden" name="category_id" value="<?= $usr->category_id; ?>" />
-                                                    </form>
-                                                    <?php }?>
+                                                        <form method="post" class="btn-action" style="">
+                                                            <button class="btn btn-sm btn-danger delete" onclick="return confirm(' you want to delete?');" name="delete" value="OK"><span class="fa fa-close" style="color:white;"></span> </button>
+                                                            <input type="hidden" name="category_id" value="<?= $usr->category_id; ?>" />
+                                                        </form>
+                                                    <?php } ?>
                                                 </td>
                                             <?php } ?>
                                             <td><?= $no++; ?></td>
                                             <td><?= $usr->category_name; ?></td>
+                                            <td><?= $notif[$usr->category_alert]; ?></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>

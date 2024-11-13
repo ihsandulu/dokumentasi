@@ -20,6 +20,11 @@
         text-shadow: black 1px 1px 1px;
     }
 
+    .color-white {
+        color: white !important;
+        text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
+    }
+
     th {
         text-align: center;
     }
@@ -273,6 +278,13 @@
                                     $thargasetelahppn = 0;
                                     $tnominal = 0;
                                     foreach ($usr->getResult() as $usr) {
+                                        if ($usr->category_alert == 1) {
+                                            $bgcolor = "bg-danger color-white";
+                                            $talert = "Wajib diisi!";
+                                        } else {
+                                            $bgcolor = "";
+                                            $talert = "";
+                                        }
                                     ?>
                                         <tr>
                                             <td style="padding-left:0px; padding-right:0px;">
@@ -331,15 +343,19 @@
                                             <td><a target="_blank" href="<?= base_url("images/transaction_suratatc/" . $usr->transaction_suratatc); ?>" class="color-pink fa fa-download"></a>&nbsp;&nbsp;<?= $usr->transaction_surat; ?></td>
                                             <td><?= $usr->transaction_nopendate; ?></td>
                                             <td><?= $usr->transaction_nopen; ?></td>
-                                            <td>
+                                            <td class="<?= $bgcolor; ?>">
                                                 <?php if ($usr->transaction_bea != "") { ?>
                                                     <?= $usr->transaction_beadate; ?>
-                                                <?php } ?>
+                                                <?php } else {
+                                                    echo $talert;
+                                                } ?>
                                             </td>
-                                            <td>
+                                            <td class="<?= $bgcolor; ?>">
                                                 <?php if ($usr->transaction_bea != "") { ?>
                                                     <a target="_blank" href="<?= base_url("images/transaction_beaatc/" . $usr->transaction_beaatc); ?>" class="color-yellow fa fa-download"></a>&nbsp;&nbsp;<?= $usr->transaction_bea; ?>
-                                                <?php } ?>
+                                                <?php } else {
+                                                    echo $talert;
+                                                } ?>
                                             </td>
                                             <td><?= $usr->transaction_status; ?></td>
                                         </tr>
