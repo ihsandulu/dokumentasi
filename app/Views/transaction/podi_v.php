@@ -156,7 +156,13 @@
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="podi_unit">Unit :</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="podi_unit" name="podi_unit" placeholder="" value="<?= $podi_unit; ?>">
+                                        <select class="form-control" id="podi_unit" name="podi_unit">
+                                            <option value="0" <?= ($podi_unit == "0") ? "selected" : ""; ?>>Pilih Kota</option>
+                                            <?php $unit = $this->db->table('unit')->orderBy("unit_name", "ASC")->get();
+                                            foreach ($unit->getResult() as $unit) { ?>
+                                                <option value="<?= $unit->unit_id; ?>" <?= ($unit->unit_id == $podi_unit) ? "selected" : ""; ?>><?= $unit->unit_name; ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
                                 </div>
 
@@ -376,6 +382,7 @@
                                     $builder = $this->db
                                         ->table("podi")
                                         ->join("user", "user.user_id=podi.user_id", "left")
+                                        ->join("unit", "unit.unit_id=podi.unit_id", "left")
                                         ->join("(SELECT city_id as corigin_id, city_name as corigin_name FROM city) AS corigin", "corigin.corigin_id=podi.podi_origin", "left")
                                         ->join("(SELECT city_id as cdes_id, city_name as cdes_name FROM city) AS cdes", "cdes.cdes_id=podi.podi_destination", "left");
                                     if (isset($_GET["from"]) && $_GET["from"] != "") {
@@ -468,7 +475,7 @@
                                             <td><?= $usr->podi_style; ?></td>
                                             <td><?= $usr->podi_item; ?></td>
                                             <td><?= $usr->podi_qty; ?></td>
-                                            <td><?= $usr->podi_unit; ?></td>
+                                            <td><?= $usr->unit_name; ?></td>
                                             <td><?= $usr->podi_etd; ?></td>
                                             <td><?= $usr->podi_eta; ?></td>
                                             <td class="<?= $bgcolor; ?>"><?= ($usr->podi_ata != "" && $usr->podi_ata != "0000-00-00") ? $usr->podi_ata : $talert; ?></td>
