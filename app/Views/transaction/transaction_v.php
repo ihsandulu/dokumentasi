@@ -137,18 +137,7 @@
                                 </div>
 
 
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="transaction_nopendate">Tgl Nopen:</label>
-                                    <div class="col-sm-10">
-                                        <input type="date" autofocus class="form-control" id="transaction_nopendate" name="transaction_nopendate" placeholder="" value="<?= $transaction_nopendate; ?>">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label col-sm-2" for="transaction_nopen">Nomor Pendaftaran:</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="transaction_nopen" name="transaction_nopen" placeholder="" value="<?= $transaction_nopen; ?>">
-                                    </div>
-                                </div>
+                                
 
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="transaction_beadate">Tgl Bea Cukai:</label>
@@ -176,6 +165,12 @@
                                             <option value="Pending" <?= ($transaction_status == "Pending") ? "selected" : ""; ?>>Pending</option>
                                             <option value="Done" <?= ($transaction_status == "Done") ? "selected" : ""; ?>>Done</option>
                                         </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="transaction_keterangan">Keterangan:</label>
+                                    <div class="col-sm-10">
+                                        <textarea class="form-control" id="transaction_keterangan" name="transaction_keterangan" placeholder=""><?= $transaction_keterangan; ?></textarea>
                                     </div>
                                 </div>
 
@@ -242,11 +237,10 @@
                                         <th>Category</th>
                                         <th class="w50">Tgl SP</th>
                                         <th>Surat Permohonan</th>
-                                        <th class="w50">Tgl Nopen</th>
-                                        <th>Nomor Pendaftaran</th>
                                         <th class="w50">Tgl Bea Cukai</th>
                                         <th>Jawaban Bea Cukai</th>
                                         <th>Status</th>
+                                        <th>Keterangan</th>
                                     </tr>
                                 </thead>
                                 <tbody>
