@@ -36,6 +36,7 @@
     td {
         padding: 1px;
     }
+    p{color:black;}
 </style>
 <div class='container-fluid'>
     <div class='row'>
