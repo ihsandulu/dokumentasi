@@ -48,7 +48,7 @@ class podi_m extends core_m
             $data["message"] = "Delete Success";
         }
 
-        $data['upload_podi_suratatc'] = "";
+        $data['upload_podi_document'] = "";
         $data['upload_podi_beaatc'] = "";
 
         $allowedMimeTypes = [
@@ -59,48 +59,25 @@ class podi_m extends core_m
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         ];
 
-        // Mengunggah file pertama (podi_suratatc)
-        if (isset($_FILES['podi_suratatc']) && $_FILES['podi_suratatc']['name'] != "") {
-            $file1 = $this->request->getFile('podi_suratatc');
+        // Mengunggah file pertama (podi_document)
+        if (isset($_FILES['podi_document']) && $_FILES['podi_document']['name'] != "") {
+            $file1 = $this->request->getFile('podi_document');
 
             if ($file1->isValid() && !$file1->hasMoved()) {
                 $type1 = $file1->getClientMimeType();
 
                 if (in_array($type1, $allowedMimeTypes)) {
-                    $direktori1 = ROOTPATH . 'images/podi_suratatc/';
+                    $direktori1 = ROOTPATH . 'images/podi_document/';
                     $name1 = date("H_i_s_") . str_replace(' ', '_', $file1->getName());
 
                     if ($file1->move($direktori1, $name1)) {
-                        $data['upload_podi_suratatc'] = "<i class='fa fa-check color-green'></i> Upload Dokumen Success!";
-                        $input['podi_suratatc'] = $name1;
+                        $data['upload_podi_document'] = "<i class='fa fa-check color-green'></i> Upload Dokumen Success!";
+                        $input['podi_document'] = $name1;
                     } else {
-                        $data['upload_podi_suratatc'] = "<i class='fa fa-times color-red'></i> Upload Dokumen Gagal!";
+                        $data['upload_podi_document'] = "<i class='fa fa-times color-red'></i> Upload Dokumen Gagal!";
                     }
                 } else {
-                    $data['upload_podi_suratatc'] = "<i class='fa fa-times color-red'></i> Format File Salah!";
-                }
-            }
-        }
-
-        // Mengunggah file kedua (podi_beaatc)
-        if (isset($_FILES['podi_beaatc']) && $_FILES['podi_beaatc']['name'] != "") {
-            $file2 = $this->request->getFile('podi_beaatc');
-
-            if ($file2->isValid() && !$file2->hasMoved()) {
-                $type2 = $file2->getClientMimeType();
-
-                if (in_array($type2, $allowedMimeTypes)) {
-                    $direktori2 = ROOTPATH . 'images/podi_beaatc/';
-                    $name2 = date("H_i_s_") . str_replace(' ', '_', $file2->getName());
-
-                    if ($file2->move($direktori2, $name2)) {
-                        $data['upload_podi_beaatc'] = "<i class='fa fa-check color-green'></i> Upload Berkas Bea Cukai Success!";
-                        $input['podi_beaatc'] = $name2;
-                    } else {
-                        $data['upload_podi_beaatc'] = "<i class='fa fa-times color-red'></i> Upload Berkas Bea Cukai Gagal!";
-                    }
-                } else {
-                    $data['upload_podi_beaatc'] = "Format File Salah!";
+                    $data['upload_podi_document'] = "<i class='fa fa-times color-red'></i> Format File Salah!";
                 }
             }
         }

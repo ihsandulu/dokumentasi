@@ -277,6 +277,14 @@
                                     </div>
                                 </div>
 
+                                
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2" for="podi_document">Upload Dokumen:</label>
+                                    <div class="col-sm-10">
+                                        <input type="file" class="form-control" id="podi_document" name="podi_document" value="<?= $podi_document; ?>">
+                                    </div>
+                                </div>
+
 
 
                                 <input type="hidden" name="podi_id" value="<?= $podi_id; ?>" />
