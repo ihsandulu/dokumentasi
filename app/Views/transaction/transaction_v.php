@@ -350,6 +350,7 @@
                                                 } ?>
                                             </td>
                                             <td><?= $usr->transaction_status; ?></td>
+                                            <td><?= $usr->transaction_keterangan; ?></td>
                                         </tr>
                                     <?php } ?>
                                 </tbody>
