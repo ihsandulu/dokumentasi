@@ -325,7 +325,7 @@
                         <?php if ($message != "") { ?>
                             <div class="alert alert-info alert-dismissable">
                                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                <strong><?= $message; ?><br /><?= $upload_podi_suratatc; ?><br /><?= $upload_podi_beaatc; ?></strong>
+                                <strong><?= $message; ?><br /><?= $upload_podi_document; ?><br /><?= $upload_podi_beaatc; ?></strong>
                             </div>
                         <?php } ?>
 
@@ -463,7 +463,7 @@
                                             <td><?= $usr->podi_date; ?></td>
                                             <td><?= $usr->podi_aju; ?></td>
                                             <td><?= $usr->podi_mbl; ?></td>
-                                            <td><?= $usr->podi_hbl; ?></td>
+                                            <td><a target="_blank" href="<?= base_url("images/podi_document/" . $usr->podi_document); ?>" class="color-pink fa fa-download"></a>&nbsp;&nbsp;<?= $usr->podi_hbl; ?></td>
                                             <td><?= $usr->podi_fileno; ?></td>
                                             <td><?= $usr->podi_style; ?></td>
                                             <td><?= $usr->podi_item; ?></td>
