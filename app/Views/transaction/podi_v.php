@@ -382,7 +382,7 @@
                                     $builder = $this->db
                                         ->table("podi")
                                         ->join("user", "user.user_id=podi.user_id", "left")
-                                        ->join("unit", "unit.unit_id=podi.unit_id", "left")
+                                        ->join("unit", "unit.unit_id=podi.podi_unit", "left")
                                         ->join("(SELECT city_id as corigin_id, city_name as corigin_name FROM city) AS corigin", "corigin.corigin_id=podi.podi_origin", "left")
                                         ->join("(SELECT city_id as cdes_id, city_name as cdes_name FROM city) AS cdes", "cdes.cdes_id=podi.podi_destination", "left");
                                     if (isset($_GET["from"]) && $_GET["from"] != "") {
