@@ -168,6 +168,24 @@
                             <a class="  " href="<?= base_url("transaction"); ?>" aria-expanded="false"><i class="fa fa-handshake-o"></i><span class="hide-menu">Transaction</span></a>
                         </li>
                     <?php } ?>
+                    <?php
+                    if (
+                        (
+                            isset(session()->get("position_administrator")[0][0])
+                            && (
+                                session()->get("position_administrator") == "1"
+                                || session()->get("position_administrator") == "2"
+                            )
+                        ) ||
+                        (
+                            isset(session()->get("halaman")['28']['act_read'])
+                            && session()->get("halaman")['28']['act_read'] == "1"
+                        )
+                    ) { ?>
+                        <li>
+                            <a class="  " href="<?= base_url("podi"); ?>" aria-expanded="false"><i class="fa fa-handshake-o"></i><span class="hide-menu">POD Import</span></a>
+                        </li>
+                    <?php } ?>
 
 
 
