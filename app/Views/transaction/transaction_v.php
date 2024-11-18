@@ -335,8 +335,6 @@
                                             <td><?= $usr->category_name; ?></td>
                                             <td><?= $usr->transaction_date; ?></td>
                                             <td><a target="_blank" href="<?= base_url("images/transaction_suratatc/" . $usr->transaction_suratatc); ?>" class="color-pink fa fa-download"></a>&nbsp;&nbsp;<?= $usr->transaction_surat; ?></td>
-                                            <td><?= $usr->transaction_nopendate; ?></td>
-                                            <td><?= $usr->transaction_nopen; ?></td>
                                             <td class="<?= $bgcolor; ?>">
                                                 <?php if ($usr->transaction_bea != "") { ?>
                                                     <?= $usr->transaction_beadate; ?>
