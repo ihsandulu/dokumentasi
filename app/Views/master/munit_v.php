@@ -64,7 +64,7 @@
                             </div>
                             <form class="form-horizontal" method="post" enctype="multipart/form-data">
                                 <div class="form-group">
-                                    <label class="control-label col-sm-2" for="unit_name">Nama Kota:</label>
+                                    <label class="control-label col-sm-2" for="unit_name">Nama Unit:</label>
                                     <div class="col-sm-10">
                                         <input required type="text" autofocus class="form-control" id="unit_name" name="unit_name" placeholder="" value="<?= $unit_name; ?>">
                                     </div>
@@ -96,7 +96,7 @@
                                             <th>Action</th>
                                         <?php } ?>
                                         <th>No.</th>
-                                        <th>Kota</th>
+                                        <th>Unit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -169,7 +169,7 @@
 </div>
 <script>
     $('.select').select2();
-    var title = "Master Kota";
+    var title = "Master Unit";
     $("title").text(title);
     $(".card-title").text(title);
     $("#page-title").text(title);
