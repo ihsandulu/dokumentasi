@@ -157,7 +157,7 @@
                                     <label class="control-label col-sm-2" for="podi_unit">Unit :</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" id="podi_unit" name="podi_unit">
-                                            <option value="0" <?= ($podi_unit == "0") ? "selected" : ""; ?>>Pilih Kota</option>
+                                            <option value="0" <?= ($podi_unit == "0") ? "selected" : ""; ?>>Pilih Unit</option>
                                             <?php $unit = $this->db->table('unit')->orderBy("unit_name", "ASC")->get();
                                             foreach ($unit->getResult() as $unit) { ?>
                                                 <option value="<?= $unit->unit_id; ?>" <?= ($unit->unit_id == $podi_unit) ? "selected" : ""; ?>><?= $unit->unit_name; ?></option>
