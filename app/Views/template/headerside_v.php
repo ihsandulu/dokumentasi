@@ -124,7 +124,24 @@
                         </li>
                     <?php } ?>
 
-
+                    <?php
+                    if (
+                        (
+                            isset(session()->get("position_administrator")[0][0])
+                            && (
+                                session()->get("position_administrator") == "1"
+                                || session()->get("position_administrator") == "2"
+                            )
+                        ) ||
+                        (
+                            isset(session()->get("halaman")['29']['act_read'])
+                            && session()->get("halaman")['29']['act_read'] == "1"
+                        )
+                    ) { ?>
+                        <li>
+                            <a class="  " href="<?= base_url("mcity"); ?>" aria-expanded="false"><i class="fa fa-cubes"></i><span class="hide-menu">Kota</span></a>
+                        </li>
+                    <?php } ?>
 
 
 

@@ -42,6 +42,7 @@ $routes->add('/muser', 'master\muser::index');
 $routes->add('/mpassword', 'master\mpassword::index');
 $routes->add('/mstore', 'master\mstore::index');
 $routes->add('/mcategory', 'master\mcategory::index');
+$routes->add('/mcity', 'master\mcity::index');
 $routes->add('/transaction', 'transaction\transaction::index');
 $routes->add('/podi', 'transaction\podi::index');
 

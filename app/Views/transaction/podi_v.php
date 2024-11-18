@@ -25,6 +25,10 @@
         text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
     }
 
+    .color-black{
+        color: black !important;
+    }
+
     th {
         text-align: center;
     }
@@ -363,7 +367,9 @@
                                     $fullURL = urlencode($currentURL . '?' . $params);
                                     $builder = $this->db
                                         ->table("podi")
-                                        ->join("user", "user.user_id=podi.user_id", "left");
+                                        ->join("user", "user.user_id=podi.user_id", "left")
+                                        ->join("(SELECT city_id as corigin_id, city_name as corigin_name FROM city) AS corigin", "corigin.corigin_id=podi.podi_origin", "left")
+                                        ->join("(SELECT city_id as cdes_id, city_name as cdes_name FROM city) AS cdes", "cdes.cdes_id=podi.podi_destination", "left");
                                     if (isset($_GET["from"]) && $_GET["from"] != "") {
                                         $builder->where("podi.podi_date >=", $this->request->getGet("from"));
                                     } else {
@@ -380,19 +386,21 @@
                                         ->get();
                                     // echo $this->db->getLastquery();die;
                                     $no = 1;
-                                    foreach ($usr->getResult() as $usr) {
-                                        if ($usr->podi_eta == date("Y-m-d")) {
+                                    foreach ($usr->getResult() as $usr) {                                        
+                                        if (date("Y-m-d") == $usr->podi_eta) {
                                             $bgcolor = "bg-warning color-white";
                                             $talert = "Datang hari ini!";
-                                        }
-                                        if ($usr->podi_eta > date("Y-m-d")) {
-                                            if ($usr->podi_ata != "") {
+                                        }else if (date("Y-m-d") > $usr->podi_eta) {
+                                            if ($usr->podi_ata != "" && $usr->podi_ata != "0000-00-00") {
                                                 $bgcolor = "bg-success color-white";
-                                                $talert = "Telah Tiba!";
+                                                $talert = "";
                                             } else {
                                                 $bgcolor = "bg-danger color-white";
                                                 $talert = "Belum Tiba!";
                                             }
+                                        }else{
+                                            $bgcolor = "bg-white color-black";
+                                            $talert = "Belum Tiba!";
                                         }
                                     ?>
                                         <tr>
@@ -455,10 +463,10 @@
                                             <td><?= $usr->podi_unit; ?></td>
                                             <td><?= $usr->podi_etd; ?></td>
                                             <td><?= $usr->podi_eta; ?></td>
-                                            <td class="<?= $bgcolor; ?>"><?= ($usr->podi_ata != "") ? $usr->podi_ata : $talert; ?></td>
+                                            <td class="<?= $bgcolor; ?>"><?= ($usr->podi_ata != "" && $usr->podi_ata != "0000-00-00") ? $usr->podi_ata : $talert; ?></td>
                                             <td><?= $usr->podi_factin; ?></td>
-                                            <td><?= $usr->podi_origin; ?></td>
-                                            <td><?= $usr->podi_destination; ?></td>
+                                            <td><?= $usr->corigin_name; ?></td>
+                                            <td><?= $usr->cdes_name; ?></td>
                                             <td><?= $usr->podi_shipmode; ?></td>
                                             <td><?= $usr->podi_type; ?></td>
                                             <td><?= $usr->podi_vf; ?></td>
