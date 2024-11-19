@@ -335,7 +335,7 @@
                             </div>
                         <?php } ?>
 
-                        <div class="table-responsive m-t-40">
+                        <div class="table-responsive tarik m-t-40">
                             <table id="podi" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                 <!-- <table id="dataTable" class="table table-condensed table-hover w-auto dtable"> -->
                                 <thead class="">
@@ -463,6 +463,13 @@
                                                         </form>
                                                     <?php } ?>
                                                 <?php } ?>
+
+                                                <form action="<?= base_url("podid"); ?>" method="get" class="btn-action" style="">
+                                                    <button class="btn btn-sm btn-primary" name="podid" value="OK">
+                                                        <span class="fa fa-address-card-o" style="color:white;"></span>
+                                                    </button>
+                                                    <input type="hidden" name="podi_id" value="<?= $usr->podi_id; ?>" />
+                                                </form>
                                             </td>
                                             <!-- <td><?= $no++; ?></td> -->
 
@@ -516,8 +523,8 @@
             buttons: [{
                 extend: 'excelHtml5',
                 text: 'Export to Excel',
-                exportOptions: {                    
-                    columns: ':not(:first-child)',// Ekspor hanya kolom yang terlihat
+                exportOptions: {
+                    columns: ':not(:first-child)', // Ekspor hanya kolom yang terlihat
                     format: {
                         body: function(data, row, column, node) {
                             // Hapus tag HTML

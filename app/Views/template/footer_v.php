@@ -132,6 +132,42 @@
 <script src="js/lib/toastr/toastr.min.js"></script>
 <script src="js/lib/toastr/toastr.init.js"></script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const tableWrapper = document.querySelector('.tarik');
+
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    tableWrapper.addEventListener('mousedown', (e) => {
+        isDown = true;
+        tableWrapper.classList.add('active');
+        startX = e.pageX - tableWrapper.offsetLeft;
+        scrollLeft = tableWrapper.scrollLeft;
+    });
+
+    tableWrapper.addEventListener('mouseleave', () => {
+        isDown = false;
+        tableWrapper.classList.remove('active');
+    });
+
+    tableWrapper.addEventListener('mouseup', () => {
+        isDown = false;
+        tableWrapper.classList.remove('active');
+    });
+
+    tableWrapper.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - tableWrapper.offsetLeft;
+        const walk = (x - startX) * 2; // Adjust scroll speed
+        tableWrapper.scrollLeft = scrollLeft - walk;
+    });
+});
+
+</script>
+
 </body>
 
 </html>

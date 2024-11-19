@@ -46,6 +46,7 @@ $routes->add('/mcity', 'master\mcity::index');
 $routes->add('/munit', 'master\munit::index');
 $routes->add('/transaction', 'transaction\transaction::index');
 $routes->add('/podi', 'transaction\podi::index');
+$routes->add('/podid', 'transaction\podid::index');
 
 
 
