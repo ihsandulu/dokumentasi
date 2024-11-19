@@ -129,6 +129,7 @@
 
 
                                 <input type="hidden" name="podid_id" value="<?= $podid_id; ?>" />
+                                <input type="hidden" name="podi_id" value="<?= $_get["podi_id"]; ?>" />
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <button type="submit" id="submit" class="btn btn-primary col-md-5" <?= $namabutton; ?> value="OK">Submit</button>
@@ -169,6 +170,7 @@
                                     $builder = $this->db
                                         ->table("podid");
                                     $usr = $builder
+                                        ->where("podi_id", $_GET["podi_id"])
                                         ->orderBy("podid.podid_id", "DESC")
                                         ->get();
                                     // echo $this->db->getLastquery();die;
