@@ -25,7 +25,7 @@
         text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 1px;
     }
 
-    .color-black{
+    .color-black {
         color: black !important;
     }
 
@@ -283,7 +283,7 @@
                                     </div>
                                 </div>
 
-                                
+
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="podi_document">Upload Dokumen:</label>
                                     <div class="col-sm-10">
@@ -336,7 +336,7 @@
                         <?php } ?>
 
                         <div class="table-responsive m-t-40">
-                            <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <table id="podi" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                                 <!-- <table id="dataTable" class="table table-condensed table-hover w-auto dtable"> -->
                                 <thead class="">
                                     <tr>
@@ -401,11 +401,11 @@
                                         ->get();
                                     // echo $this->db->getLastquery();die;
                                     $no = 1;
-                                    foreach ($usr->getResult() as $usr) {                                        
+                                    foreach ($usr->getResult() as $usr) {
                                         if (date("Y-m-d") == $usr->podi_eta) {
                                             $bgcolor = "bg-warning color-white";
                                             $talert = "Datang hari ini!";
-                                        }else if (date("Y-m-d") > $usr->podi_eta) {
+                                        } else if (date("Y-m-d") > $usr->podi_eta) {
                                             if ($usr->podi_ata != "" && $usr->podi_ata != "0000-00-00") {
                                                 $bgcolor = "bg-success color-white";
                                                 $talert = "";
@@ -413,7 +413,7 @@
                                                 $bgcolor = "bg-danger color-white";
                                                 $talert = "Belum Tiba!";
                                             }
-                                        }else{
+                                        } else {
                                             $bgcolor = "bg-white color-black";
                                             $talert = "Belum Tiba!";
                                         }
@@ -509,6 +509,25 @@
     $(".card-title").text(title);
     $("#page-title").text(title);
     $("#page-title-link").text(title);
+
+    $(document).ready(function() {
+        $('#podi').DataTable({
+            dom: 'Bfrtip',
+            buttons: [{
+                extend: 'excelHtml5',
+                text: 'Export to Excel',
+                exportOptions: {                    
+                    columns: ':not(:first-child)',// Ekspor hanya kolom yang terlihat
+                    format: {
+                        body: function(data, row, column, node) {
+                            // Hapus tag HTML
+                            return $('<div>').html(data).text();
+                        }
+                    }
+                }
+            }]
+        });
+    });
 </script>
 
 <?php echo  $this->include("template/footer_v"); ?>
