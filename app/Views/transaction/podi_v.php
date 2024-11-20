@@ -420,7 +420,7 @@
                                         }
 
                                         
-                                        if (date("Y-m-d") >= $usr->podi_factin) {
+                                        if (date("Y-m-d") >= $usr->podi_factin && $usr->podi_factin!="0000-00-00") {
                                             $tbgcolor = "bgsuccess";
                                         }else{
                                             $tbgcolor = "";
