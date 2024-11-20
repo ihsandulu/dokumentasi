@@ -40,6 +40,7 @@
     td {
         padding: 1px;
     }
+    .bgsuccess{background-color: #D0F3B4!important;}
 </style>
 <div class='container-fluid'>
     <div class='row'>
@@ -417,8 +418,15 @@
                                             $bgcolor = "bg-white color-black";
                                             $talert = "Belum Tiba!";
                                         }
+
+                                        
+                                        if (date("Y-m-d") >= $usr->podi_factin) {
+                                            $tbgcolor = "bgsuccess";
+                                        }else{
+                                            $tbgcolor = "";
+                                        }
                                     ?>
-                                        <tr>
+                                        <tr class="<?=$tbgcolor;?>">
                                             <td style="padding-left:0px; padding-right:0px;">
                                                 <?php if (!isset($_GET["report"])) { ?>
                                                     <?php
@@ -477,7 +485,7 @@
                                             <td><?= $usr->podi_date; ?></td>
                                             <td><?= $usr->podi_aju; ?></td>
                                             <td><?= $usr->podi_mbl; ?></td>
-                                            <td><a target="_blank" href="<?= base_url("images/podi_document/" . $usr->podi_document); ?>" class="color-pink fa fa-download"></a>&nbsp;&nbsp;<?= $usr->podi_hbl; ?></td>
+                                            <td><?= $usr->podi_hbl; ?></td>
                                             <td><?= $usr->podi_fileno; ?></td>
                                             <td><?= $usr->podi_style; ?></td>
                                             <td><?= $usr->podi_item; ?></td>
