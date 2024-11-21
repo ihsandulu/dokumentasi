@@ -44,7 +44,7 @@ class podi_m extends core_m
             $podi_id =   $this->request->getPost("podi_id");
             $this->db
                 ->table("podi")
-                ->delete(array("podi_id" => $podi_id, "store_id" => session()->get("store_id")));
+                ->delete(array("podi_id" => $podi_id));
             $data["message"] = "Delete Success";
         }
 
