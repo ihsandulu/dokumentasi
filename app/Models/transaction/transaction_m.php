@@ -119,11 +119,18 @@ class transaction_m extends core_m
             } else {
                 $lalu = $this->db->table("transaction")->orderBy("transaction_id", "DESC")->limit("1")->get();
                 if ($lalu->getNumRows() > 0) {
-                    $transactionsurat = $lalu->getRow()->transaction_surat;
-                    $nomorex = explode("/", $transactionsurat);
-                    $nomor = (int) ltrim($nomorex[0], '0');
-                    // echo $nomor;die;
-                    $nomor += 1;
+                    $tdate = $lalu->getRow()->transaction_date;
+                    $trdate = date("Y", strtotime($tdate));
+                    // echo $trdate;die;
+                    if ($trdate != date("Y")) {
+                        $nomor = 1;
+                    } else {
+                        $transactionsurat = $lalu->getRow()->transaction_surat;
+                        $nomorex = explode("/", $transactionsurat);
+                        $nomor = (int) ltrim($nomorex[0], '0');
+                        // echo $nomor;die;
+                        $nomor += 1;
+                    }
                 } else {
                     $nomor = 1;
                 }
