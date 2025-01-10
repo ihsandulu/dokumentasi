@@ -42,18 +42,23 @@ class podid_m extends core_m
         //delete
         if ($this->request->getPost("delete") == "OK") {
             $podid_id =   $this->request->getPost("podid_id");
-            $filePath =   $this->request->getPost("podid_document");
-            if ($filePath) {        
-                // Cek apakah file ada di server
+            $file =   $this->request->getPost("podid_document");
+            if ($file) {
+                $file1 = urldecode($file);
+                $filePath = $_SERVER['DOCUMENT_ROOT'] . parse_url($file1, PHP_URL_PATH);
                 if (file_exists($filePath)) {
                     // Hapus file dari server
                     unlink($filePath);
+                    $this->db
+                        ->table("podid")
+                        ->delete(array("podid_id" => $podid_id));
+                    $data["message"] = "Delete Success";
+                } else {
+                    $data["message"] = "File tidak ditemukan1";
                 }
+            } else {
+                $data["message"] = "File tidak ditemukan2";
             }
-            $this->db
-                ->table("podid")
-                ->delete(array("podid_id" => $podid_id));
-            $data["message"] = "Delete Success";
         }
 
         $data['upload_podid_document'] = "";
