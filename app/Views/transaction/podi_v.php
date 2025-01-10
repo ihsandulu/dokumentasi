@@ -212,10 +212,10 @@
                                     <label class="control-label col-sm-2" for="podi_destination">Destination :</label>
                                     <div class="col-sm-10">
                                         <select class="form-control" id="podi_destination" name="podi_destination">
-                                            <option value="0" <?= ($podi_origin == "0") ? "selected" : ""; ?>>Pilih Kota</option>
+                                            <option value="0" <?= ($podi_destination == "0") ? "selected" : ""; ?>>Pilih Kota</option>
                                             <?php $city = $this->db->table('city')->orderBy("city_name", "ASC")->get();
                                             foreach ($city->getResult() as $city) { ?>
-                                                <option value="<?= $city->city_id; ?>" <?= ($city->city_id == $podi_origin) ? "selected" : ""; ?>><?= $city->city_name; ?></option>
+                                                <option value="<?= $city->city_id; ?>" <?= ($city->city_id == $podi_destination) ? "selected" : ""; ?>><?= $city->city_name; ?></option>
                                             <?php } ?>
                                         </select>
                                     </div>
