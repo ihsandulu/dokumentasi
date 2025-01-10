@@ -219,6 +219,7 @@
                                                         <form method="post" class="btn-action" style="">
                                                             <button class="btn btn-sm btn-danger delete" onclick="return confirm(' you want to delete?');" name="delete" value="OK"><span class="fa fa-close" style="color:white;"></span> </button>
                                                             <input type="hidden" name="podid_id" value="<?= $usr->podid_id; ?>" />
+                                                            <input type="hidden" name="podid_document" value="<?= base_url("images/podid_document/" . $usr->podid_document); ?>" />
                                                         </form>
                                                     <?php } ?>
                                                 <?php } ?>

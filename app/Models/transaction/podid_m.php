@@ -42,6 +42,14 @@ class podid_m extends core_m
         //delete
         if ($this->request->getPost("delete") == "OK") {
             $podid_id =   $this->request->getPost("podid_id");
+            $filePath =   $this->request->getPost("podid_document");
+            if ($filePath) {        
+                // Cek apakah file ada di server
+                if (file_exists($filePath)) {
+                    // Hapus file dari server
+                    unlink($filePath);
+                }
+            }
             $this->db
                 ->table("podid")
                 ->delete(array("podid_id" => $podid_id));
